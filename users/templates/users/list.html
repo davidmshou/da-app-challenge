@@ -1,0 +1,27 @@
+<form>
+    {% if user_list %}
+        {% for user in user_list %}
+    <section>
+            <div>{{user}}</div>
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <button name="delete_button" value="Click" id="Delete_{{user}}">Remove User</button>
+            </form>
+    </section>
+        {% endfor %}
+    {% endif %}
+
+</form>
+<a href ="{% url 'add' %}">Add new user</a>
+<!-- <a href ="{% url 'delete' %}">Remove a user</a> -->
+
+<!-- <body>
+    {% for name, value in user_list.get_attributes %}
+        {% if value %}
+            {{ user_list }}
+        {% endif %}
+    {% endfor %}
+</body>
+ -->
+
+ 

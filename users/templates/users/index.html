@@ -1,0 +1,8 @@
+<form action="/users/add/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+<a href ="{% url 'index' %}">All users</a>
+<!-- <a href ="{% url 'delete' %}">Remove a user</a> -->
+
