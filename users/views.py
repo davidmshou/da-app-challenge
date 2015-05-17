@@ -3,12 +3,12 @@ from .models import User
 from .forms import UserForm
 from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 def index(request):
     # return HttpResponse("Hello, there. This is the index of all our users.")
-    user_list = User.objects.order_by("first_name")
+    user_list = User.objects.order_by("id")
     # for user in users:
     #     user_list = users(list)
     # lines = []
@@ -64,11 +64,15 @@ def add(request):
 #     return HttpResponseRedirect(reverse("index"))
 
 
-def delete(request):
-    users = User.objects.get(first_name=User.first_name)
-    for user in users:
-        if request.POST("delete_button"):
-            user.delete()
+def delete(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    user.delete()
+    return HttpResponseRedirect(reverse('index'))
+
+    # users = User.objects.order_by("id")
+    # for user in users:
+    #     if request.POST("delete_button"):
+    #         user.delete()
     # return HttpResponse("Delete")
     # user_list = User.objects.all()
     # for user in user_list:
