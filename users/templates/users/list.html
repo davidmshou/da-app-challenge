@@ -6,6 +6,7 @@
             <form action="#" method="POST">
                 {% csrf_token %}
                 <a href="{% url 'delete' user.id %}" data-name="{{user}}">Delete</a>
+                <a href="{% url 'edit' user.id %}" data-name="{{user}}">Edit User</a>
             </form>
     </section>
         {% endfor %}

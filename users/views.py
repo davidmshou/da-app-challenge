@@ -44,37 +44,38 @@ def add(request):
 
     return render(request, 'users/index.html', {'form': form})
 
-    # newUser = User(first_name=request.POST["first_name"],
-    #                last_name=request.POST["last_name"],
-    #                email=request.POST["email"],)
-    # newUser.save()
-    # return HttpResponseRedirect(reverse("index"))
+
+def detail(request, user_id=None):
+    context = {'user': get_object_or_404(User, pk=user_id),
+               'sub_template': 'users/list.html'}
+
+    return render(request, 'users/index.html', context)
 
 
-# def edit(request):
-#     user = User.objects.get(email=request.POST["originalEmail"])
-#     if request.POST["submitButton"] == "Update":
-#         user.first_name = request.POST["first_name"]
-#         user.last_name = request.POST["last_name"]
-#         user.email = request.POST["email"]
-#         user.save()
-#     elif request.POST["submitButton"] == "Delete":
-#         user.delete()
+def edit(request, user_id):
+    # form = UserForm(request.POST or None)
+    # if form.is_valid():
+    #     # instance = form.save(commit=False)
+    #     user = get_object_or_404(User, pk=user_id)
+    #     user.first_name = request.POST.get('first_name', '')
+    #     user.last_name = request.POST.get('last_name', '')
+    #     user.email = request.POST.get('email', '')
+    #     new_user = User(first_name=user.first_name, last_name=user.last_name, email=user.email)
+    #     new_user.save()
+    #     return HttpResponseRedirect('')
+    # return render(request, 'users/index.html', {'form': form})
+    if user_id != 0:
+        user = get_object_or_404(User, pk=user_id)
 
-#     return HttpResponseRedirect(reverse("index"))
+        user.first_name = request.POST["first_name"]
+        user.last_name = request.POST["last_name"]
+        user.email = request.POST["email"]
+        user.save()
+
+    return HttpResponseRedirect(reverse('index'))
 
 
 def delete(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     user.delete()
     return HttpResponseRedirect(reverse('index'))
-
-    # users = User.objects.order_by("id")
-    # for user in users:
-    #     if request.POST("delete_button"):
-    #         user.delete()
-    # return HttpResponse("Delete")
-    # user_list = User.objects.all()
-    # for user in user_list:
-
-    # return render(request, 'users/delete.html', {'user_list': user_list})
