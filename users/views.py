@@ -1,34 +1,14 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from .models import User
 from .forms import UserForm
 from django.core.urlresolvers import reverse
-from django.template import RequestContext, loader
 from django.shortcuts import render, get_object_or_404
 
 
 def index(request):
-    # return HttpResponse("Hello, there. This is the index of all our users.")
     user_list = User.objects.order_by("id")
-    # for user in users:
-    #     user_list = users(list)
-    # lines = []
-    # for user in user_list:
-    #     lines.append({
-    #         "First": user.first_name,
-    #         "Last": user.last_name,
-    #         "Email": user.email,
-    #     })
-    #     return lines
 
-    # return HttpResponse(user_list)
     return render(request, 'users/list.html', {'user_list': user_list})
-
-    # user_list = User.objects.all()
-    # template = loader.get_template("users/index.html")
-    # context = RequestContext(request, {
-    #     "user_list": user_list,
-    # })
-    # return HttpResponse(template.render(context))
 
 
 def add(request):
