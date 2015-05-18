@@ -64,13 +64,13 @@ def edit(request, user_id):
     #     new_user.save()
     #     return HttpResponseRedirect('')
     # return render(request, 'users/index.html', {'form': form})
-    if user_id != 0:
-        user = get_object_or_404(User, pk=user_id)
+    # if user_id != 0:
+    user = get_object_or_404(User, pk=user_id)
 
-        user.first_name = request.POST["first_name"]
-        user.last_name = request.POST["last_name"]
-        user.email = request.POST["email"]
-        user.save()
+    user.first_name = request.POST["first_name"]
+    user.last_name = request.POST["last_name"]
+    user.email = request.POST["email"]
+    user.save()
 
     return HttpResponseRedirect(reverse('index'))
 
