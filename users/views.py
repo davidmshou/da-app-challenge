@@ -26,6 +26,11 @@ def add(request):
 
 
 def detail(request, user_id=None):
+    """
+    Considered using seperate detail template for editing, but then decided on
+    trying to use only 1 template. Roadblocked by a
+    MultiValueDictKeyError at time of required submission.
+    """
     context = {'user': get_object_or_404(User, pk=user_id),
                'sub_template': 'users/list.html'}
 
@@ -33,6 +38,9 @@ def detail(request, user_id=None):
 
 
 def edit(request, user_id):
+    """
+    Edit view still not functioning at the time of application submission.
+    """
     # form = UserForm(request.POST or None)
     # if form.is_valid():
     #     # instance = form.save(commit=False)
